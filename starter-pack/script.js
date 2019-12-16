@@ -3,7 +3,10 @@ const menuButton = document.querySelector('.menu-button');
 
 menuButton.addEventListener('click', (e) => {
     const pageNavigation = document.querySelector('.page-navigation');
+    const menuButton = document.querySelector('.menu-button');
+
     pageNavigation.classList.toggle('show-page-navigation');
+    menuButton.classList.toggle('menu-button--opened');
 });
 
 // Mark ticket as bought

@@ -309,11 +309,49 @@ SEKCJA "PHOTOS"
     width: calc((100% - 3 * 20px) / 3);
     margin-top: 20px;
     margin-left: 20px;
+    animation-duration: .4s;
+    animation-name: grey;
+    animation-fill-mode: forwards;
+}
+
+@keyframes grey {
+    0% {
+        filter: invert(0) grayscale(0);
+    }
+    50% {
+        filter: invert(.2) grayscale(.3);
+    }
+    100% {
+        filter: invert(.3) grayscale(.5);
+    }
 }
 
 .gallery__image {
     width: 100%;
     border-top: 3px solid #EF008E;
+}
+
+@keyframes shake {
+    0% {
+        transform: scale(1) rotate(0);
+        filter: invert(.3) grayscale(.5);
+    }
+    25% {
+        transform: scale(1.05) rotate(3deg);
+    }
+    75% {
+        transform: scale(1.1) rotate(-6deg);
+    }
+    100% {
+        transform: scale(1) rotate(3deg);
+        filter: invert(0) grayscale(0);
+    }
+}
+
+.gallery__item:hover {
+    animation-name: shake;
+    animation-timing-function: linear;
+    animation-fill-mode: unset;
 }
 
 @supports (display: grid) {
@@ -610,14 +648,47 @@ SEKCJA "CONTACT"
     }
 
     .menu-button {
-        display: unset;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .page-navigation {
-        display: none;
+        max-height: 0;
+        overflow: hidden;
+        transition-property: opacity, max-height;
+        transition-duration: .5s;
+        /*transition-delay: .2s, 0s;*/
+        opacity: 0;
     }
 
     .show-page-navigation {
         display: unset;
+        max-height: 195px;
+        opacity: 1;
+        overflow: unset;
+        transition-delay: .2s, 0s;
+    }
+
+    .menu-button__item {
+        background-color: rgba(204, 200, 255, 0.8);
+        width: 25px;
+        height: 4px;
+        border-radius: 15%;
+        transition-property: transform, opacity;
+        transition-duration: .5s;
+    }
+
+    .menu-button--opened .menu-button__item:nth-child(1) {
+        transform: translateY(9px) rotate(52deg);
+    }
+
+    .menu-button--opened .menu-button__item:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-button--opened .menu-button__item:nth-child(3) {
+        transform: translateY(-9px) rotate(-52deg);
     }
 }
